@@ -1,0 +1,18 @@
+services:
+    gamesite:
+      build: .
+      restart: unless-stopped
+      user: nextjs
+      cap_drop:
+        - ALL
+      security_opt:
+        - "no-new-privileges=true"
+      read_only: true
+      tmpfs:
+        - /tmp
+        - /app/.next/cache
+      environment:
+        - NEXT_SHARP_PATH=/app/node_modules/sharp
+      ports:
+        - "3338:3338"
+ 
